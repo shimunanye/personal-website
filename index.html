@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lsy的个人网页</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+            background-image: url('your-background-pattern.jpg'); /* 手绘插画风格底色和纹样 */
+            background-size: cover;
+        }
+        header {
+            background-color: #004d40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #00796b;
+        }
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        nav a:hover {
+            background-color: #004d40;
+        }
+        .container {
+            display: none;
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .section h2 {
+            border-bottom: 2px solid #004d40;
+            padding-bottom: 10px;
+        }
+        .about, .portfolio, .contact, .guestbook {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .portfolio img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .contact form, .guestbook form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 300px;
+        }
+        .contact form input, .contact form textarea, .guestbook form input, .guestbook form textarea {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .contact form button, .guestbook form button {
+            padding: 10px;
+            background-color: #00796b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .contact form button:hover, .guestbook form button:hover {
+            background-color: #004d40;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #004d40;
+            color: white;
+        }
+        .game-container {
+            text-align: center;
+            margin: 20px 0;
+            display: block;
+            background-color: #004d40;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .game-canvas {
+            border: 2px solid #00796b;
+            background-color: #f5f5f5;
+            width: 100%;
+            height: 50px;
+        }
+        .contact-info {
+            margin-top: 20px;
+        }
+        .guestbook-messages {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 500px;
+            background-color: #e0f7fa;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .guestbook-messages p {
+            padding: 5px;
+            border-bottom: 1px solid #ccc;
+        }
+        .guestbook-messages p:last-child {
+            border-bottom: none;
+        }
+        .game-trigger {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background-color: #00796b;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+        }
+        .game-trigger:hover {
+            background-color: #004d40;
+        }
+        @media (max-width: 768px) {
+            nav a {
+                padding: 10px 15px;
+            }
+            .section {
+                margin-bottom: 20px;
+                padding: 15px;
+            }
+            .contact form, .guestbook form {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>lsy</h1>
+        <p>文创产品设计 | 新媒体运营 | 视频剪辑</p>
+        <div class="game-trigger" onclick="toggleGame()">G</div>
+    </header>
+    <nav>
+        <a href="#about" onclick="showSection('about')">关于我</a>
+        <a href="#daily" onclick="showSection('daily')">日常记录</a>
+        <a href="#portfolio" onclick="showSection('portfolio')">作品展示</a>
+        <a href="#contact" onclick="showSection('contact')">联系方式</a>
+        <a href="#guestbook" onclick="showSection('guestbook')">留言板</a>
+    </nav>
+    <div class="container" id="about">
+        <section class="section about">
+            <h2>关于我</h2>
+            <p>这里是你的个人简介和照片。</p>
+            <img src="your-image-url.jpg" alt="个人照片">
+        </section>
+    </div>
+    <div class="container" id="daily">
+        <section class="section">
+            <h2>日常记录</h2>
+            <p>这里是你日常记录的内容和博客文章。</p>
+        </section>
+    </div>
+    <div class="container" id="portfolio">
+        <section class="section portfolio">
+            <h2>作品展示</h2>
+            <p>这里展示你的设计作品、新媒体运营案例和视频剪辑作品。</p>
+            <img src="your-image-url.jpg" alt="作品展示">
+        </section>
+    </div>
+    <div class="container" id="contact">
+        <section class="section contact">
+            <h2>联系方式</h2>
+            <form>
+                <input type="text" placeholder="你的名字" required>
+                <input type="email" placeholder="你的邮箱" required>
+                <textarea placeholder="你的留言" required></textarea>
+                <button type="submit">发送</button>
+            </form>
+            <div class="contact-info">
+                <p>邮箱: 2657117889@qq.com</p>
+            </div>
+        </section>
+    </div>
+    <div class="container" id="guestbook">
+        <section class="section guestbook">
+            <h2>游客留言板</h2>
+            <form id="guestbookForm">
+                <input type="text" id="guestName" placeholder="你的名字" required>
+                <input type="email" id="guestEmail" placeholder="你的邮箱" required>
+                <textarea id="guestMessage" placeholder="你的留言" required></textarea>
+                <button type="submit">提交留言</button>
+            </form>
+            <div class="guestbook-messages" id="guestbookMessages">
+                <!-- 留言显示区域 -->
+            </div>
+        </section>
+    </div>
+    <footer>
+        <p>© 2024 lsy. 保留所有权利.</p>
+    </footer>
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.container').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+        }
+        showSection('about'); // 默认显示关于我部分
+
+        function toggleGame() {
+            const gameContainer = document.querySelector('.game-container');
+            gameContainer.style.display = gameContainer.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // 留言板提交表单处理
+        const guestbookForm = document.getElementById("guestbookForm");
+        const guestbookMessages = document.getElementById("guestbookMessages");
+
+        guestbookForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            const guestName = document.getElementById("guestName").value;
+            const guestEmail = document.getElementById("guestEmail").value;
+            const guestMessage = document.getElementById("guestMessage").value;
+
+            // 创建留言元素
+            const messageElement = document.createElement("p");
+            messageElement.textContent = `${guestName} (${guestEmail}): ${guestMessage}`;
+
+            // 添加到留言板
+            guestbookMessages.appendChild(messageElement);
+
+            // 清空表单
+            guestbookForm.reset();
+        });
+
+        // 像素恐龙跳跃游戏
+        const canvas = document.createElement("canvas");
+        canvas.classList.add("game-canvas");
+        document.querySelector(".game-container").appendChild(canvas);
+        const ctx = canvas.getContext("2d");
+
+        // 设置画布宽度和高度
+        canvas.width = window.innerWidth - 20;
+        canvas.height = 60;
+
+        const dino = {
+            x: 50,
+            y: 30,
+            width: 20,
+            height: 20,
+            color: "#ff5722",
+            vy: 0,
+            gravity: 0.6,
+            jumpPower: -10
+        };
+
+        let isJumping = false;
+        const groundHeight = canvas.height - 10;
+
+        function drawDino() {
+            ctx.fillStyle = dino.color;
+            ctx.fillRect(dino.x, dino.y, dino.width, dino.height);
+        }
+
+        function updateDino() {
+            if (isJumping) {
+                dino.vy = dino.jumpPower;
+                isJumping = false;
+            }
+            dino.y += dino.vy;
+            if (dino.y + dino.height > groundHeight) {
+                dino.y = groundHeight - dino.height;
+                dino.vy = 0;
+            } else {
+                dino.vy += dino.gravity;
+            }
+        }
+
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawDino();
+            updateDino();
+            requestAnimationFrame(gameLoop);
+        }
+
+        // 键盘控制
+        document.addEventListener("keydown", function(event) {
+            if (event.code === "Space" && dino.y + dino.height === groundHeight) {
+                isJumping = true;
+            }
+        });
+
+        // 启动游戏循环
+        gameLoop();
+    </script>
+</body>
+</html>
